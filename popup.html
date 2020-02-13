@@ -1,329 +1,329 @@
-  <!DOCTYPE html>
-  <html lang="da">
-
-  <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>BISTRO BABUSHKA</title>
-      <link rel="stylesheet" href="">
-      <style>
-          * {
-              box-sizing: border-box;
-          }
-
-          body {
-              margin: 0;
-          }
-
-          img {
-              object-fit: cover;
-              max-width: 100%;
-          }
-
-
-
-          header {
-              text-align: center;
-              justify-content: center;
-              align-items: center;
-              height: 110px;
-              width: 100%;
-              display: flex;
-              background: #ff8000;
-              color: white;
-              font-size: 1.2rem;
-          }
-
-          nav {
-              display: flex;
-              justify-content: center;
-              padding-bottom: 25px;
-              padding-top: 10px;
-          }
-
-
-          button {
-              box-shadow: inset 0px 1px 0px 0px #ffffff;
-              background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-              background-color: #f9f9f9;
-              border-radius: 6px;
-              border: 1px solid #dcdcdc;
-              display: inline-block;
-              cursor: pointer;
-              color: #666666;
-              font-size: 15px;
-              font-weight: bold;
-              padding: 6px 24px;
-              text-decoration: none;
-              text-shadow: 0px 1px 0px #ffffff;
-          }
-
-          button:focus {
-              outline: 0;
-          }
-
-          button:hover {
-              transform: scale(1.04);
-              box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
-          }
-
-          #container {
-              max-width: 1000px;
-              margin: 0 auto;
-              display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-              grid-column-gap: 15px;
-              grid-row-gap: 15px;
-          }
-
-          .produkt {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              padding: 20px 10px 0 10px;
-              max-height: 420px;
-              transition: .3s;
-              cursor: pointer;
-          }
-
-          .produkt:hover {
-              transition: 0.4s;
-              transform: scale(1.04);
-              box-shadow: 0 0px 25px 0 rgba(0, 0, 0, 0.1);
-          }
-
-
-
-          .produkt p,
-          .produkt h2,
-          .produkt img {
-              text-align: center;
-          }
-
-          #detalje {
-              overflow: scroll;
-              position: fixed;
-              width: 100vw;
-              height: 100%;
-              background-color: rgba(0, 0, 0, .5);
-              z-index: 10;
-              left: 0;
-              top: 0;
-          }
-
-          #produkt-detalje {
-              margin: 6em;
-              margin-top: 10%;
-              padding: 2em;
-              background-color: #fff;
-              display: flex;
-              flex-wrap: nowrap;
-              flex-direction: row;
-          }
-
-          .produkt-beskrivelse {
-              flex-basis: 50%;
-              flex-grow: 1;
-              padding-left: 15px;
-          }
-
-          #detalje img {
-              display: flex;
-              justify-content: center;
-              text-align: center;
-              max-width: 40vw;
-              flex-basis: 50%;
-              flex-grow: 1;
-          }
-
-          #detalje button {
-              position: absolute;
-              right: 10%;
-              font-size: 1.5rem;
-              max-height: 30px;
-              max-width: 30px;
-              display: flex;
-              justify-content: center;
-              border: none;
-              background-color: #fff;
-              cursor: pointer;
-          }
-
-          .valgt {
-              opacity: 60%;
-              color: black;
-              background: white
-          }
-
-          .skjul {
-              display: none;
-          }
-
-          #detalje button:focus {
-              outline: 0;
-          }
-
-          .overskrift {
-              text-align: center;
-          }
-
-
-          @media screen and (max-width: 800px) {
-
-              nav,
-              #container {
-                  padding: 0 30px;
-              }
-
-              nav {
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-              }
-
-              #produkt-detalje {
-                  flex-wrap: wrap;
-                  justify-content: center;
-                  text-align: center;
-                  align-items: center;
-                  align-content: center;
-              }
-
-          }
-
-      </style>
-  </head>
-
-  <body>
-      <section id="detalje" class="skjul">
-          <article id="produkt-detalje">
-              <button id="luk">X</button>
-              <img src="" alt="">
-              <div class="produkt-beskrivelse">
-                  <h1></h1>
-                  <p></p>
-                  <p></p>
-                  <p></p>
-                  <p></p>
-              </div>
-
-          </article>
-      </section>
-
-      <header>
-          <h1 id="babushka">BISTRO BABUSHKA</h1>
-      </header>
-      <nav>
-          <button class="filter valgt" data-kategori="alle">Alle</button>
-          <button class="filter" data-kategori="forretter">Forreter</button>
-          <button class="filter" data-kategori="hovedretter">Hovedretter</button>
-          <button class="filter" data-kategori="desserter">Desserter</button>
-          <button class="filter" data-kategori="sideorders">Sideorders</button>
-          <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
-      </nav>
-
-
-
-      <section class="overskrift">
-          <h1>MENU</h1>
-      </section>
-      <section id="container"></section>
-      <template>
-          <article id="" class="produkt">
-              <h2></h2>
-              <img src="" alt="">
-              <p class="kort"></p>
-              <p class="pris">Pris: </p>
-          </article>
-      </template>
-
-
-
-      <script>
-          const endpoint = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
-          const detalje = document.querySelector("#detalje");
-
-          let produkter = [];
-          let filterKnap = document.querySelectorAll(".filter");
-          let kategori = "alle";
-
-
-          document.addEventListener("DOMContentLoaded", start);
-
-          function start() {
-              hentData();
-
-              filterKnap.forEach(knap => {
-                  knap.addEventListener("click", filtrering);
-              });
-
-          }
-
-          async function hentData() {
-              const response = await fetch(endpoint);
-              produkter = await response.json();
-              console.log(produkter);
-              visProdukter();
-          }
-
-          function filtrering() {
-              filterKnap.forEach(knap => {
-                  knap.classList.remove("valgt");
-              });
-
-              this.classList.add("valgt");
-
-              kategori = this.dataset.kategori;
-              console.log(kategori);
-
-              visProdukter();
-
-          }
-
-
-          function visProdukter() {
-              let container = document.querySelector("#container");
-              let produktTemplate = document.querySelector("template");
-              let article = document.querySelector("article");
-
-              container.innerHTML = "";
-
-              produkter.feed.entry.forEach(produkt => {
-                  if (kategori == "alle" || produkt.gsx$kategori.$t == kategori) {
-                      let klon = produktTemplate.cloneNode(true).content;
-                      klon.querySelector("h2").textContent = produkt.gsx$navn.$t;
-                      klon.querySelector("img").src = `imgs/small/${produkt.gsx$billede.$t}-sm.jpg`;
-                      klon.querySelector("p").textContent += produkt.gsx$kort.$t;
-                      klon.querySelector("p:last-child").textContent += produkt.gsx$pris.$t + ",-";
-                      klon.querySelector(".produkt").addEventListener("click", () => {
-                          visDetalje(produkt);
-                      });
-
-                      container.appendChild(klon);
-                  }
-
-              });
-
-          }
-
-          function visDetalje(produkt) {
-              detalje.classList.remove("skjul");
-              detalje.querySelector("#luk").addEventListener("click", () => {
-                  detalje.classList.add("skjul");
-              });
-
-              console.log(produkt.gsx$navn.$t);
-
-              detalje.querySelector("h1").textContent = produkt.gsx$navn.$t;
-              detalje.querySelector("p").textContent = "Oprindelse: " + produkt.gsx$oprindelse.$t;
-              detalje.querySelector("p + p").textContent = "Kategori: " + produkt.gsx$kategori.$t;
-              detalje.querySelector("p + p + p").textContent = produkt.gsx$lang.$t;
-              detalje.querySelector("p:last-child").textContent = "Pris: " + produkt.gsx$pris.$t + ",-";
-              detalje.querySelector("img").src = `imgs/large/${produkt.gsx$billede.$t}.jpg`;
-              detalje.querySelector("img").alt = "Retten: " + produkt.gsx$navn.$t;
-          }
-
-      </script>
-  </body>
-
-  </html>
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BISTRO BABUSHKA</title>
+    <link rel="stylesheet" href="">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        img {
+            object-fit: cover;
+            max-width: 100%;
+        }
+
+
+
+        header {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 110px;
+            width: 100%;
+            display: flex;
+            background: #ff8000;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 25px;
+            padding-top: 10px;
+        }
+
+
+        button {
+            box-shadow: inset 0px 1px 0px 0px #ffffff;
+            background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #dcdcdc;
+            display: inline-block;
+            cursor: pointer;
+            color: #666666;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #ffffff;
+        }
+
+        button:focus {
+            outline: 0;
+        }
+
+        button:hover {
+            transform: scale(1.04);
+            box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        #container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-column-gap: 15px;
+            grid-row-gap: 15px;
+        }
+
+        .produkt {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 10px 0 10px;
+            max-height: 420px;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .produkt:hover {
+            transition: 0.4s;
+            transform: scale(1.04);
+            box-shadow: 0 0px 25px 0 rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .produkt p,
+        .produkt h2,
+        .produkt img {
+            text-align: center;
+        }
+
+        #detalje {
+            overflow: scroll;
+            position: fixed;
+            width: 100vw;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: 10;
+            left: 0;
+            top: 0;
+        }
+
+        #produkt-detalje {
+            margin: 6em;
+            margin-top: 10%;
+            padding: 2em;
+            background-color: #fff;
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+        }
+
+        .produkt-beskrivelse {
+            flex-basis: 50%;
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+
+        #detalje img {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            max-width: 40vw;
+            flex-basis: 50%;
+            flex-grow: 1;
+        }
+
+        #detalje button {
+            position: absolute;
+            right: 10%;
+            font-size: 1.5rem;
+            max-height: 30px;
+            max-width: 30px;
+            display: flex;
+            justify-content: center;
+            border: none;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .valgt {
+            opacity: 60%;
+            color: black;
+            background: white
+        }
+
+        .skjul {
+            display: none;
+        }
+
+        #detalje button:focus {
+            outline: 0;
+        }
+
+        .overskrift {
+            text-align: center;
+        }
+
+
+        @media screen and (max-width: 800px) {
+
+            nav,
+            #container {
+                padding: 0 30px;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            #produkt-detalje {
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                align-content: center;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <section id="detalje" class="skjul">
+        <article id="produkt-detalje">
+            <button id="luk">X</button>
+            <img src="" alt="">
+            <div class="produkt-beskrivelse">
+                <h1></h1>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+
+        </article>
+    </section>
+
+    <header>
+        <h1 id="babushka">BISTRO BABUSHKA</h1>
+    </header>
+    <nav>
+        <button class="filter valgt" data-kategori="alle">Alle</button>
+        <button class="filter" data-kategori="forretter">Forreter</button>
+        <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+        <button class="filter" data-kategori="desserter">Desserter</button>
+        <button class="filter" data-kategori="sideorders">Sideorders</button>
+        <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+
+
+
+    <section class="overskrift">
+        <h1>MENU</h1>
+    </section>
+    <section id="container"></section>
+    <template>
+        <article id="" class="produkt">
+            <h2></h2>
+            <img src="" alt="">
+            <p class="kort"></p>
+            <p class="pris">Pris: </p>
+        </article>
+    </template>
+
+
+
+    <script>
+        const endpoint = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json";
+        const detalje = document.querySelector("#detalje");
+
+        let produkter = [];
+        let filterKnap = document.querySelectorAll(".filter");
+        let kategori = "alle";
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            hentData();
+
+            filterKnap.forEach(knap => {
+                knap.addEventListener("click", filtrering);
+            });
+
+        }
+
+        async function hentData() {
+            const response = await fetch(endpoint);
+            produkter = await response.json();
+            console.log(produkter);
+            visProdukter();
+        }
+
+        function filtrering() {
+            filterKnap.forEach(knap => {
+                knap.classList.remove("valgt");
+            });
+
+            this.classList.add("valgt");
+
+            kategori = this.dataset.kategori;
+            console.log(kategori);
+
+            visProdukter();
+
+        }
+
+
+        function visProdukter() {
+            let container = document.querySelector("#container");
+            let produktTemplate = document.querySelector("template");
+            let article = document.querySelector("article");
+
+            container.innerHTML = "";
+
+            produkter.feed.entry.forEach(produkt => {
+                if (kategori == "alle" || produkt.gsx$kategori.$t == kategori) {
+                    let klon = produktTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = produkt.gsx$navn.$t;
+                    klon.querySelector("img").src = `imgs/small/${produkt.gsx$billede.$t}-sm.jpg`;
+                    klon.querySelector("p").textContent += produkt.gsx$kort.$t;
+                    klon.querySelector("p:last-child").textContent += produkt.gsx$pris.$t + ",-";
+                    klon.querySelector(".produkt").addEventListener("click", () => {
+                        visDetalje(produkt);
+                    });
+
+                    container.appendChild(klon);
+                }
+
+            });
+
+        }
+
+        function visDetalje(produkt) {
+            detalje.classList.remove("skjul");
+            detalje.querySelector("#luk").addEventListener("click", () => {
+                detalje.classList.add("skjul");
+            });
+
+            console.log(produkt.gsx$navn.$t);
+
+            detalje.querySelector("h1").textContent = produkt.gsx$navn.$t;
+            detalje.querySelector("p").textContent = "Oprindelse: " + produkt.gsx$oprindelse.$t;
+            detalje.querySelector("p + p").textContent = "Kategori: " + produkt.gsx$kategori.$t;
+            detalje.querySelector("p + p + p").textContent = produkt.gsx$lang.$t;
+            detalje.querySelector("p:last-child").textContent = "Pris: " + produkt.gsx$pris.$t + ",-";
+            detalje.querySelector("img").src = `imgs/large/${produkt.gsx$billede.$t}.jpg`;
+            detalje.querySelector("img").alt = "Retten: " + produkt.gsx$navn.$t;
+        }
+
+    </script>
+</body>
+
+</html>
